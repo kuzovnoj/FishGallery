@@ -22,12 +22,15 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.bluerose.fishgallery.R
+import com.bluerose.fishgallery.ui.screens.statistics.models.StatisticsEvent
 import com.bluerose.fishgallery.ui.theme.FishGalleryTheme
 import com.bluerose.fishgallery.ui.theme.components.JetRoundIcon
 import com.bluerose.fishgallery.ui.theme.jetShape
 
 @Composable
-fun StatisticsViewDisplay() {
+fun StatisticsViewDisplay(
+    dispatcher: (StatisticsEvent) -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -49,7 +52,7 @@ fun StatisticsViewDisplay() {
                 "~ 108 000 000 ",
                 stringResource(R.string.our_catch_value),
                 modifier = Modifier.fillMaxWidth(),
-                onClick = { print("Hi") }
+                onClick = { dispatcher.invoke(StatisticsEvent.OpenCatchScreen) }
             )
 
             StatisticsCard(
@@ -57,7 +60,7 @@ fun StatisticsViewDisplay() {
                 "> 5 400 000 ",
                 stringResource(R.string.our_profit_value),
                 modifier = Modifier.fillMaxWidth(),
-                onClick = { print("Hi") }
+                onClick = { dispatcher.invoke(StatisticsEvent.OpenCatchScreen) }
             )
 
             StatisticsCard(
@@ -65,7 +68,7 @@ fun StatisticsViewDisplay() {
                 "1 500+ ",
                 stringResource(R.string.our_partners_value),
                 modifier = Modifier.fillMaxWidth(),
-                onClick = { print("Hi") }
+                onClick = { dispatcher.invoke(StatisticsEvent.OpenCatchScreen) }
             )
         }
 
@@ -84,7 +87,9 @@ fun StatisticsViewDisplay() {
 
             JetRoundIcon(
                 drawableId = R.drawable.ic_appicon1,
-                modifier = Modifier.clickable(onClick = { }).clip(shape = jetShape.medium)
+                modifier = Modifier
+                    .clickable(onClick = { })
+                    .clip(shape = jetShape.medium)
             )
         }
     }
@@ -94,6 +99,6 @@ fun StatisticsViewDisplay() {
 @Composable
 private fun ShowPreview() {
     FishGalleryTheme {
-        StatisticsViewDisplay()
+        StatisticsViewDisplay {}
     }
 }

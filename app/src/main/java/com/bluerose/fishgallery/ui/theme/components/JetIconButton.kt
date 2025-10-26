@@ -1,5 +1,6 @@
 package com.bluerose.fishgallery.ui.theme.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
@@ -10,6 +11,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -22,7 +24,8 @@ fun JetIconButton(
     vectorDrawableId: Int,
     contentPadding: PaddingValues,
     shape: RoundedCornerShape,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit = {}
 ) {
     Box(
         contentAlignment = Alignment.Center,
@@ -34,6 +37,8 @@ fun JetIconButton(
                 on = 7.dp,
                 off = 7.dp
             )
+            .clip(shape)
+            .clickable(onClick = onClick)
             .padding(contentPadding)
     ) {
         Icon(
